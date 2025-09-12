@@ -25,7 +25,6 @@ def developers_list_view(request):
     return render(request, 'developers/developers_list.html', {'developers': developers_list})
 
 
-
 def developer_cv_view(request, username):
     developer = next((dev for dev in developers_list if dev['username'] == username), None)
     if not developer:
