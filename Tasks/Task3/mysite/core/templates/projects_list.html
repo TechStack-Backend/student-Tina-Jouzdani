@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Projects</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-4">
+  <h1>Projects</h1>
+  <a href="{% url 'project_create' %}" class="btn btn-primary mb-3">New Project</a>
+  <ul class="list-group">
+    {% for project in projects %}
+      <li class="list-group-item">
+        <h5>{{ project.title }}</h5>
+        <p>{{ project.description|linebreaksbr }}</p>
+        <p>Developers:
+          {% if project.developers.all %}
+            {% for d in project.developers.all %}
+              <span class="badge bg-info text-dark">{{ d.first_name }} {{ d.last_name }}</span>
+            {% endfor %}
+          {% else %}
+            <span class="text-muted">No developers assigned</span>
+          {% endif %}
+        </p>
+      </li>
+    {% empty %}
+      <li class="list-group-item">No projects yet.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
