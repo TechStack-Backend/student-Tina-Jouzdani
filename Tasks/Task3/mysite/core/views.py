@@ -4,11 +4,11 @@ from .forms import DeveloperForm, ProjectForm
 
 def developers_list(request):
     developers = Developer.objects.prefetch_related('skills').all()
-    return render(request, 'core/developers_list.html', {'developers': developers})
+    return render(request, 'developers_list.html', {'developers': developers})
 
 def projects_list(request):
     projects = Project.objects.prefetch_related('developers').all()
-    return render(request, 'core/projects_list.html', {'projects': projects})
+    return render(request, 'projects_list.html', {'projects': projects})
 
 def developer_create(request):
     if request.method == 'POST':
@@ -18,7 +18,7 @@ def developer_create(request):
             return redirect('developers_list')
     else:
         form = DeveloperForm()
-    return render(request, 'core/developer_form.html', {'form': form})
+    return render(request, 'developer_form.html', {'form': form})
 
 def project_create(request):
     if request.method == 'POST':
@@ -30,4 +30,4 @@ def project_create(request):
             return redirect('projects_list')
     else:
         form = ProjectForm()
-    return render(request, 'core/project_form.html', {'form': form})
+    return render(request, 'project_form.html', {'form': form})
